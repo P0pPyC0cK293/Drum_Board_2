@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton btnBass;
     private ImageButton btnCrash;
     private ImageButton btnRide;
+    private ImageButton btnHi;
 
 
     @Override
@@ -45,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnHi = findViewById(R.id.btn_hi_hat);
+        btnHi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playHi();
+            }
+        });
     }
 
     private void playBass() {
@@ -86,4 +94,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void playHi() {
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.sample_hi_hit);
+        mp.start();
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.stop();
+                mp.release();
+                mp=null;
+            }
+        });
+    }
 }
